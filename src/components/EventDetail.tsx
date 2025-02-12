@@ -1,8 +1,11 @@
 
-import { Calendar, MapPin, X } from "lucide-react";
+import { Calendar, MapPin, X, Ticket } from "lucide-react";
 import SharedFeatures from "./SharedFeatures";
+import DigitalTicket from "./DigitalTicket";
+import { useState } from "react";
 
 interface EventDetailProps {
+  id: number;
   title: string;
   date: string;
   location: string;
@@ -10,7 +13,9 @@ interface EventDetailProps {
   onClose: () => void;
 }
 
-const EventDetail = ({ title, date, location, image, onClose }: EventDetailProps) => {
+const EventDetail = ({ id, title, date, location, image, onClose }: EventDetailProps) => {
+  const [showTicket, setShowTicket] = useState(false);
+
   return (
     <div className="fixed inset-0 bg-gradient-to-br from-[#FF8C7A] to-[#FFB77A]">
       <div className="h-full overflow-auto">
@@ -19,10 +24,30 @@ const EventDetail = ({ title, date, location, image, onClose }: EventDetailProps
             <button onClick={onClose} className="p-2 hover:bg-black/10 rounded-full">
               <X className="w-6 h-6 text-white" />
             </button>
-            <button className="preview-button">
-              Preview
-            </button>
+            <div className="flex space-x-4">
+              <button 
+                onClick={() => setShowTicket(!showTicket)}
+                className="preview-button flex items-center space-x-2"
+              >
+                <Ticket className="w-5 h-5" />
+                <span>{showTicket ? "Hide Ticket" : "Show Ticket"}</span>
+              </button>
+              <button className="preview-button">
+                Preview
+              </button>
+            </div>
           </div>
+
+          {showTicket && (
+            <div className="mb-6 animate-fade-up">
+              <DigitalTicket
+                eventId={id}
+                title={title}
+                date={date}
+                location={location}
+              />
+            </div>
+          )}
 
           {image && (
             <div className="relative h-80 mb-6">

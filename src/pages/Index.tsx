@@ -10,7 +10,7 @@ const mockEvents = [
     id: 1,
     title: "Cocktail Night",
     date: "Sun, February 16, 6:00 PM",
-    time: "6:00 PM",  // Added the required time property
+    time: "6:00 PM",
     location: "907, Bhanwar Kua Road, Indore, Madhya Pradesh",
     image: "public/lovable-uploads/5e8aaadb-5310-412b-addb-60cd2f24a4a8.png"
   }
